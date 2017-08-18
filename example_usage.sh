@@ -5,7 +5,7 @@ scriptname=$(basename "$0");
 help_message="\
 Usage: ./$scriptname [-h] [-u <username>] [-f] [--test]
 
-Exhibit example behaviour of standard_input_helper library.
+Exhibit example behaviour of standard_input_helpers library.
 
 Options:
 
@@ -20,26 +20,26 @@ Options:
 ";
 
 function example_args_parser() {
-	if [ -z $1 ]
-	then
-		standard_input_helper.usage "$help_message";
-	fi
+    if [ -z $1 ]
+    then
+        standard_input_helpers.usage "$help_message";
+    fi
     case $1 in 
-        "-h"|"--help") standard_input_helper.usage "$help_message";;
+        "-h"|"--help") standard_input_helpers.usage "$help_message";;
         "-u") USERNAME=$2 && ARGS_SHIFT=2;;   
         "-f") FORCE_CONFIRM="y";;
 		"--test") echo "Executing a test run...";;
         *)
         echo "Unexpected parameter $1."
-        standard_input_helper.usage "$help_message";
+        standard_input_helpers.usage "$help_message";
     esac
 }
 
-# load standard_input_helper library
-source standard_input_helper.sh;
+# load standard_input_helpers library
+source standard_input_helpers.sh;
 
 # retrieve user input arguments via custom parser
-standard_input_helper.read_all_args_via_custom_parser example_args_parser $*;
+standard_input_helpers.read_all_args_via_custom_parser example_args_parser $*;
 
 # demonstrate if username was parsed sucessfully
 printf "\n";
@@ -60,7 +60,7 @@ WARNING_ABOUT_FORCE_STR="\
 WARNING: careful about forcing through my greeting...\n\
 any other prompts will be force confirmed as well\n\n";
 # prompt user for confirmation (skip if force parameter was supplied)
-standard_input_helper.prompt_confirmation "Want me to say hello (y/n)? " $FORCE_CONFIRM;
+standard_input_helpers.prompt_confirmation "Want me to say hello (y/n)? " $FORCE_CONFIRM;
 # check if user answered in the affirmative
 if [[ $CONFIRMATION =~ ^[Yy]$ ]]; then
 	printf "\n"
@@ -88,10 +88,10 @@ if [[ -z $CONFIG_PATH ]]; then
 fi
 
 # prompt user for confirmation (skip if force parameter was supplied)
-standard_input_helper.prompt_confirmation "Want to get an example value from the config file (y/n)? " $FORCE_CONFIRM;
+standard_input_helpers.prompt_confirmation "Want to get an example value from the config file (y/n)? " $FORCE_CONFIRM;
 # check if user answered in the affirmative
 if [[ $CONFIRMATION =~ ^[Yy]$ ]]; then
-	EXAMPLE_VALUE="$(standard_input_helper.config_get EXAMPLE_VALUE)";
+	EXAMPLE_VALUE="$(standard_input_helpers.config_get EXAMPLE_VALUE)";
     printf "\n";
     if [ "${EXAMPLE_VALUE}" = "__UNDEFINED__" ]; then
         echo "Unable to retrieve 'EXAMPLE_VALUE' from config file at path = '${CONFIG_PATH}' or via default 'config.cgf.defaults'";
@@ -104,10 +104,10 @@ fi
 CONFIRMATION="n";
 
 # prompt user for confirmation (skip if force parameter was supplied)
-standard_input_helper.prompt_confirmation "Want to try iterating through example array from config file (y/n)? " $FORCE_CONFIRM;
+standard_input_helpers.prompt_confirmation "Want to try iterating through example array from config file (y/n)? " $FORCE_CONFIRM;
 # check if user answered in the affirmative
 if [[ $CONFIRMATION =~ ^[Yy]$ ]]; then
-	declare -a example_strings_array="$(standard_input_helper.config_get EXAMPLE_STRINGS_ARRAY)";
+	declare -a example_strings_array="$(standard_input_helpers.config_get EXAMPLE_STRINGS_ARRAY)";
 	printf "\n";
     if [ "${example_strings_array}" = "__UNDEFINED__" ]; then
         echo "Unable to retrieve 'EXAMPLE_STRINGS_ARRAY' from config file at path = '${CONFIG_PATH}' or via default 'config.cgf.defaults'";
