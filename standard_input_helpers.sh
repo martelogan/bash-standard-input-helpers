@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-# Helper script for bash standard input routines
-# Author: Logan Martel
-# Version: 1.0.0
+# Helper script for bash standard input routines.
+# Copyright (C) 2017 Logan Martel - All Rights Reserved
+# Permission to copy and modify is granted under the MIT License
+# Last revised 06/29/2018
 
 # This script is a namespaced function library of bash standard input helpers
 

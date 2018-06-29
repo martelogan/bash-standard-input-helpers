@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Example script for bash-standard-input-helpers library usage.
+# Copyright (C) 2017 Logan Martel - All Rights Reserved
+# Permission to copy and modify is granted under the MIT License
+# Last revised 06/29/2018
+
 # example help message
 scriptname=$(basename "$0");
 help_message="\
